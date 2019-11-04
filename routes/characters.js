@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 // @route       PUT api/characters/:id
 // @desc        Update a user's character
 // @access      Private
-router.get('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   res.send('Update a users character');
 });
 
