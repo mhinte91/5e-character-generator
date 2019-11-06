@@ -17,18 +17,37 @@ router.get('/', auth, async (req, res) => {
       date: -1
     });
     // Returns all characters
-    res.json(characters)
+    res.json(characters);
   } catch (err) {
-    res.status(500).send('Server Error')
+    res.status(500).send('Server Error');
   }
 });
 
 // @route       POST api/characters
 // @desc        Add new character
 // @access      Private
-router.post('/', (req, res) => {
-  res.send('Add new character');
-});
+router.post(
+  '/',
+  // Runs middleware and checks that name field is not empty
+  [
+    auth,
+    [
+      check('name', 'Name is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  (req, res) => {
+    // Checks for validation erros
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Pull out data from the body
+    const { name, race, heroClass, bio, stats } = req.body;
+  }
+);
 
 // @route       PUT api/characters/:id
 // @desc        Update a user's character

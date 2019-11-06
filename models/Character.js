@@ -24,7 +24,7 @@ const CharacterSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  class: {
+  heroClass: {
     type: String,
     required: true
   },
