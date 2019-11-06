@@ -37,7 +37,7 @@ router.post(
         .isEmpty()
     ]
   ],
-  (req, res) => {
+  async (req, res) => {
     // Checks for validation erros
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -46,6 +46,27 @@ router.post(
 
     // Pull out data from the body
     const { name, race, heroClass, bio, stats } = req.body;
+
+    try {
+      // Creates a new character model, including the user
+      const newCharacter = new Character({
+        name,
+        race,
+        heroClass,
+        bio,
+        stats,
+        user: req.user.id
+      });
+
+      // Saves the new character to database
+      const character = await newCharacter.save();
+
+      // Return character to client
+      res.json(character);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
   }
 );
 
