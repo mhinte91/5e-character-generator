@@ -1,11 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+const { check, validationResult } = require('express-validator');
+
+const User = require('../models/User');
+const Character = require('../models/Character');
 
 // @route       GET api/characters
 // @desc        Get all user's characters
 // @access      Private
-router.get('/', (req, res) => {
-  res.send('Get all users characters');
+router.get('/', auth, async (req, res) => {
+  // Pull from database
+  try {
+    // Finds character by specific user matching req.user.is, and sorts by newest first
+    const characters = await Character.find({ user: req.user.id }).sort({
+      date: -1
+    });
+    // Returns all characters
+    res.json(characters)
+  } catch (err) {
+    res.status(500).send('Server Error')
+  }
 });
 
 // @route       POST api/characters
