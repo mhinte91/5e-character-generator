@@ -56,7 +56,7 @@ router.post(
       // Saves a new user to the database
       await user.save();
 
-      // Create payload, the object we want to send in the token
+      // Create a payload object to send to token
       const payload = {
         user: {
           id: user.id
