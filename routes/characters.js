@@ -38,7 +38,7 @@ router.post(
     ]
   ],
   async (req, res) => {
-    // Checks for validation erros
+    // Checks for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -73,8 +73,42 @@ router.post(
 // @route       PUT api/characters/:id
 // @desc        Update a user's character
 // @access      Private
-router.put('/:id', (req, res) => {
-  res.send('Update a users character');
+router.put('/:id', auth, async (req, res) => {
+  // Pull out data from the body
+  const { name, race, heroClass, bio, stats } = req.body;
+
+  // Build character object, if these are included, add
+  // to character fields
+  const characterFields = {};
+  if (name) characterFields.name = name;
+  if (race) characterFields.race = race;
+  if (heroClass) characterFields.heroClass = heroClass;
+  if (bio) characterFields.bio = bio;
+  if (stats) characterFields.stats = stats;
+
+  try {
+    // Finds the character by parameter ID
+    let character = await Character.findById(req.params.id);
+
+    if (!character) return res.status(404).json({ msg: 'Character not found' });
+
+    // Make sure user owns the character
+    if (character.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    // Do the update
+    character = await Character.findByIdAndUpdate(
+      req.params.id,
+      { $set: characterFields },
+      { new: true }
+    );
+
+    res.json(character);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route       DELETE api/characters/:id
