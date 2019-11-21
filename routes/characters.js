@@ -89,7 +89,6 @@ router.put('/:id', auth, async (req, res) => {
   try {
     // Finds the character by parameter ID
     let character = await Character.findById(req.params.id);
-
     if (!character) return res.status(404).json({ msg: 'Character not found' });
 
     // Make sure user owns the character
@@ -114,8 +113,24 @@ router.put('/:id', auth, async (req, res) => {
 // @route       DELETE api/characters/:id
 // @desc        Delete a character
 // @access      Private
-router.delete('/:id', (req, res) => {
-  res.send('Delete a character');
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    // Finds the character by parameter ID
+    let character = await Character.findById(req.params.id);
+    if (!character) return res.status(404).json({ msg: 'Character not found' });
+
+    // Make sure user owns the character
+    if (character.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    await Character.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'Character removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;
