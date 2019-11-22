@@ -6,10 +6,30 @@ const CharacterForm = () => {
     race: '',
     heroClass: '',
     bio: '',
-    stats: []
+    strength: '',
+    dexterity: '',
+    constitution: '',
+    intelligence: '',
+    wisdom: '',
+    charisma: '',
+    hitpoints: '',
+    experience: ''
   });
 
-  const { name, race, heroClass, bio, stats } = character;
+  const {
+    name,
+    race,
+    heroClass,
+    bio,
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+    hitpoints,
+    experience
+  } = character;
 
   const onChange = e =>
     setCharacter({ ...character, [e.target.name]: e.target.value });
@@ -21,6 +41,7 @@ const CharacterForm = () => {
       1 +
       (Math.floor(Math.random() * 6) + 1) +
       (Math.floor(Math.random() * 6) + 1);
+    setCharacter({ ...character, [e.target.name]: stat });
   };
 
   return (
@@ -61,14 +82,14 @@ const CharacterForm = () => {
           <input
             type='number'
             placeholder='0'
-            name='stats.strength'
-            value={stats.strength}
+            name='strength'
+            value={strength}
             onChange={onChange}
           />
           <button
             onClick={onClick}
-            name='stats.strength'
-            value={stats.strength}
+            name='strength'
+            value={strength}
             className='badge badge-primary'
           >
             Roll!
@@ -79,58 +100,98 @@ const CharacterForm = () => {
           <input
             type='number'
             placeholder='0'
-            name='stats.intelligence'
-            value={stats.intelligence}
+            name='intelligence'
+            value={intelligence}
             onChange={onChange}
           />
+          <button
+            onClick={onClick}
+            name='intelligence'
+            value={intelligence}
+            className='badge badge-primary'
+          >
+            Roll!
+          </button>
         </div>
         <div className='badge badge-light'>
           <div>Dexterity</div>
           <input
             type='number'
             placeholder='0'
-            name='stats.dexterity'
-            value={stats.dexterity}
+            name='dexterity'
+            value={dexterity}
             onChange={onChange}
           />
+          <button
+            onClick={onClick}
+            name='dexterity'
+            value={dexterity}
+            className='badge badge-primary'
+          >
+            Roll!
+          </button>
         </div>
         <div className='badge badge-light'>
           <div>Wisdom</div>
           <input
             type='number'
             placeholder='0'
-            name='stats.wisdom'
-            value={stats.wisdom}
+            name='wisdom'
+            value={wisdom}
             onChange={onChange}
           />
+          <button
+            onClick={onClick}
+            name='wisdom'
+            value={wisdom}
+            className='badge badge-primary'
+          >
+            Roll!
+          </button>
         </div>
         <div className='badge badge-light'>
           <div>Constitution</div>
           <input
             type='number'
             placeholder='0'
-            name='stats.constitution'
-            value={stats.constitution}
+            name='constitution'
+            value={constitution}
             onChange={onChange}
           />
+          <button
+            onClick={onClick}
+            name='constitution'
+            value={constitution}
+            className='badge badge-primary'
+          >
+            Roll!
+          </button>
         </div>
         <div className='badge badge-light'>
           <div>Charisma</div>
           <input
             type='number'
             placeholder='0'
-            name='stats.charisma'
-            value={stats.charisma}
+            name='charisma'
+            value={charisma}
             onChange={onChange}
           />
+          <button
+            onClick={onClick}
+            name='charisma'
+            value={charisma}
+            className='badge badge-primary'
+          >
+            Roll!
+          </button>
         </div>
         <div className='badge badge-light'>
           <div>HitPoints</div>
           <input
             type='number'
             placeholder='0'
-            name='stats.hitpoints'
-            value={stats.hitpoints}
+            name='hitpoints'
+            value={hitpoints}
             onChange={onChange}
           />
         </div>
@@ -139,8 +200,8 @@ const CharacterForm = () => {
           <input
             type='number'
             placeholder='0'
-            name='stats.experience'
-            value={stats.experience}
+            name='experience'
+            value={experience}
             onChange={onChange}
           />
         </div>

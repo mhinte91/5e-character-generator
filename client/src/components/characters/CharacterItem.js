@@ -23,28 +23,26 @@ const CharacterItem = ({ character }) => {
         )}
         <div style={userStyle} className='card text-center'>
           <div className='badge badge-primary'>
-            Strength: {character.stats[0].strength}
+            Strength: {character.strength}
           </div>
           <div className='badge badge-primary'>
-            Intelligence: {character.stats[0].intelligence}
+            Intelligence: {character.intelligence}
           </div>
           <div className='badge badge-primary'>
-            Dexterity: {character.stats[0].dexterity}
+            Dexterity: {character.dexterity}
+          </div>
+          <div className='badge badge-primary'>Wisdom: {character.wisdom}</div>
+          <div className='badge badge-primary'>
+            Constitution: {character.constitution}
           </div>
           <div className='badge badge-primary'>
-            Wisdom: {character.stats[0].wisdom}
-          </div>
-          <div className='badge badge-primary'>
-            Constitution: {character.stats[0].constitution}
-          </div>
-          <div className='badge badge-primary'>
-            Charisma: {character.stats[0].charisma}
+            Charisma: {character.charisma}
           </div>
           <div className='badge badge-dark'>
-            HitPoints: {character.stats[0].hitpoints}
+            HitPoints: {character.hitpoints}
           </div>
           <div className='badge badge-dark'>
-            Experience: {character.stats[0].experience}
+            Experience: {character.experience}
           </div>
         </div>
       </ul>

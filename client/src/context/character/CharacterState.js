@@ -21,18 +21,14 @@ const CharacterState = props => {
         race: 'Half-Orc',
         heroClass: 'Fighter',
         bio: 'Strongest Fighter in the West...',
-        stats: [
-          {
-            strength: 18,
-            dexterity: 12,
-            constitution: 14,
-            intelligence: 10,
-            wisdom: 14,
-            charisma: 13,
-            hitpoints: 56,
-            experience: 14000
-          }
-        ]
+        strength: 18,
+        dexterity: 12,
+        constitution: 14,
+        intelligence: 10,
+        wisdom: 14,
+        charisma: 13,
+        hitpoints: 56,
+        experience: 14000
       },
       {
         id: 2,
@@ -40,18 +36,15 @@ const CharacterState = props => {
         race: 'Human',
         heroClass: 'Bard',
         bio: 'An ambitious entreprenuer',
-        stats: [
-          {
-            strength: 12,
-            dexterity: 13,
-            constitution: 11,
-            intelligence: 16,
-            wisdom: 13,
-            charisma: 18,
-            hitpoints: 40,
-            experience: 13900
-          }
-        ]
+
+        strength: 12,
+        dexterity: 13,
+        constitution: 11,
+        intelligence: 16,
+        wisdom: 13,
+        charisma: 18,
+        hitpoints: 40,
+        experience: 13900
       }
     ]
   };

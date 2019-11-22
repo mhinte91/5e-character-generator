@@ -31,7 +31,14 @@ const CharacterSchema = mongoose.Schema({
   bio: {
     type: String
   },
-  stats: [StatsSchema]
+  strength: { type: Number, required: true },
+  dexterity: { type: Number, required: true },
+  constitution: { type: Number, required: true },
+  intelligence: { type: Number, required: true },
+  wisdom: { type: Number, required: true },
+  charisma: { type: Number, required: true },
+  hitpoints: { type: Number },
+  experience: { type: Number }
 });
 
 module.exports = mongoose.model('character', CharacterSchema);
