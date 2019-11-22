@@ -4,12 +4,13 @@ import CharacterContext from '../../context/character/characterContext';
 
 const CharacterItem = ({ character }) => {
   const characterContext = useContext(CharacterContext);
-  const { deleteCharacter } = characterContext;
+  const { deleteCharacter, setCurrent, clearCurrent } = characterContext;
 
   const { id, name, race, heroClass, bio } = character;
 
   const onDelete = () => {
     deleteCharacter(id);
+    clearCurrent();
   };
 
   return (
@@ -57,7 +58,7 @@ const CharacterItem = ({ character }) => {
       <p>
         <button
           className='btn btn-dark btn-sm'
-          //   onClick={() => setCurrent(character)}
+          onClick={() => setCurrent(character)}
         >
           Edit
         </button>

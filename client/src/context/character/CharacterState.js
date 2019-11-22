@@ -46,7 +46,8 @@ const CharacterState = props => {
         hitpoints: 40,
         experience: 13900
       }
-    ]
+    ],
+    current: null
   };
 
   const [state, dispatch] = useReducer(characterReducer, initialState);
@@ -62,9 +63,13 @@ const CharacterState = props => {
     dispatch({ type: DELETE_CHARACTER, payload: id });
   };
   // Set Current Character
-
+  const setCurrent = character => {
+    dispatch({ type: SET_CURRENT, payload: character });
+  };
   // Clear Current Character
-
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
   // Update Character
 
   // Filter Characters
@@ -75,8 +80,11 @@ const CharacterState = props => {
     <CharacterContext.Provider
       value={{
         characters: state.characters,
+        current: state.current,
         addCharacter,
-        deleteCharacter
+        deleteCharacter,
+        setCurrent,
+        clearCurrent
       }}
     >
       {props.children}
