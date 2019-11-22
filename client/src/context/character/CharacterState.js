@@ -52,6 +52,10 @@ const CharacterState = props => {
   const [state, dispatch] = useReducer(characterReducer, initialState);
 
   // Add Character
+  const addCharacter = character => {
+    character.id = uuid.v4();
+    dispatch({ type: ADD_CHARACTER, payload: character });
+  };
 
   // Delete Character
 
@@ -68,7 +72,8 @@ const CharacterState = props => {
   return (
     <CharacterContext.Provider
       value={{
-        characters: state.characters
+        characters: state.characters,
+        addCharacter
       }}
     >
       {props.children}

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import CharacterContext from '../../context/character/characterContext';
 
 const CharacterForm = () => {
+  const characterContext = useContext(CharacterContext);
   const [character, setCharacter] = useState({
     name: '',
     race: '',
@@ -53,12 +55,30 @@ const CharacterForm = () => {
     array.forEach(i => {
       counter += i;
     });
-
     setCharacter({ ...character, [e.target.name]: counter });
   };
 
+  const onSubmit = e => {
+    e.preventDefault();
+    characterContext.addCharacter(character);
+    setCharacter({
+      name: '',
+      race: '',
+      heroClass: '',
+      bio: '',
+      strength: '',
+      dexterity: '',
+      constitution: '',
+      intelligence: '',
+      wisdom: '',
+      charisma: '',
+      hitpoints: '',
+      experience: ''
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <h2 className='text-primary'>New Character</h2>
       <input
         type='text'
