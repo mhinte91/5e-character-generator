@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import CharacterContext from '../../context/character/characterContext';
 
 const CharacterItem = ({ character }) => {
-  const { name, race, heroClass, bio } = character;
+  const characterContext = useContext(CharacterContext);
+  const { deleteCharacter } = characterContext;
+
+  const { id, name, race, heroClass, bio } = character;
+
+  const onDelete = () => {
+    deleteCharacter(id);
+  };
 
   return (
     <div className='card bg-light'>
@@ -53,7 +61,7 @@ const CharacterItem = ({ character }) => {
         >
           Edit
         </button>
-        <button className='btn btn-danger btn-sm' /*onClick={onDelete}*/>
+        <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>
       </p>

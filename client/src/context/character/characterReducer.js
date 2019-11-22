@@ -15,6 +15,13 @@ export default (state, action) => {
         ...state,
         characters: [...state.characters, action.payload]
       };
+    case DELETE_CHARACTER:
+      return {
+        ...state,
+        characters: state.characters.filter(
+          character => character.id !== action.payload
+        )
+      };
     default:
       return state;
   }

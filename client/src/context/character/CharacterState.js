@@ -58,7 +58,9 @@ const CharacterState = props => {
   };
 
   // Delete Character
-
+  const deleteCharacter = id => {
+    dispatch({ type: DELETE_CHARACTER, payload: id });
+  };
   // Set Current Character
 
   // Clear Current Character
@@ -73,7 +75,8 @@ const CharacterState = props => {
     <CharacterContext.Provider
       value={{
         characters: state.characters,
-        addCharacter
+        addCharacter,
+        deleteCharacter
       }}
     >
       {props.children}
