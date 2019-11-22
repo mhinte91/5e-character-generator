@@ -1,9 +1,13 @@
 import React from 'react';
+import Characters from '../characters/Characters';
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className='grid-2'>
+      <div>{/* CharacterForm */}</div>
+      <div>
+        <Characters />
+      </div>
     </div>
   );
 };
