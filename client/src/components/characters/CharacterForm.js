@@ -36,12 +36,25 @@ const CharacterForm = () => {
 
   const onClick = e => {
     e.preventDefault();
-    let stat =
-      Math.floor(Math.random() * 6) +
-      1 +
-      (Math.floor(Math.random() * 6) + 1) +
-      (Math.floor(Math.random() * 6) + 1);
-    setCharacter({ ...character, [e.target.name]: stat });
+    // let stat =
+    //   Math.floor(Math.random() * 6) +
+    //   1 +
+    //   (Math.floor(Math.random() * 6) + 1) +
+    //   (Math.floor(Math.random() * 6) + 1);
+
+    /* Safe Roll */
+    let array = [];
+    let counter = 0;
+    array.push(Math.floor(Math.random() * 6) + 1);
+    array.push(Math.floor(Math.random() * 6) + 1);
+    array.push(Math.floor(Math.random() * 6) + 1);
+    array.push(Math.floor(Math.random() * 6) + 1);
+    array.sort().shift();
+    array.forEach(i => {
+      counter += i;
+    });
+
+    setCharacter({ ...character, [e.target.name]: counter });
   };
 
   return (
@@ -68,7 +81,7 @@ const CharacterForm = () => {
         value={heroClass}
         onChange={onChange}
       />
-      <input
+      <textarea
         type='text'
         placeholder='Bio'
         name='bio'
