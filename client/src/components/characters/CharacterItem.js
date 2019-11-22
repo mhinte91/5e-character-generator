@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CharacterItem = ({ character }) => {
-  const { name, race, heroClass, bio, stats } = character;
-
-  let statArray = stats.map(function(stat) {
-    return stat;
-  });
+  const { name, race, heroClass, bio } = character;
 
   return (
     <div className='card bg-light'>
