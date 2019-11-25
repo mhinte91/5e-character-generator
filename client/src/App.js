@@ -5,23 +5,26 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 
 import CharacterState from './context/character/CharacterState';
+import AuthState from './context/auth/AuthState';
 import './App.css';
 
 const App = () => {
   return (
-    <CharacterState>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <div className='container'>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/about' component={About} />
-            </Switch>
-          </div>
-        </Fragment>
-      </Router>
-    </CharacterState>
+    <AuthState>
+      <CharacterState>
+        <Router>
+          <Fragment>
+            <Navbar />
+            <div className='container'>
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/about' component={About} />
+              </Switch>
+            </div>
+          </Fragment>
+        </Router>
+      </CharacterState>
+    </AuthState>
   );
 };
 
