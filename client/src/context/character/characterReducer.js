@@ -6,29 +6,48 @@ import {
   UPDATE_CHARACTER,
   FILTER_CHARACTERS,
   CLEAR_FILTER,
-  CHARACTER_ERROR
+  CHARACTER_ERROR,
+  GET_CHARACTERS,
+  CLEAR_CHARACTERS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_CHARACTERS:
+      return {
+        ...state,
+        characters: action.payload,
+        loading: false
+      };
     case ADD_CHARACTER:
       return {
         ...state,
-        characters: [...state.characters, action.payload]
+        characters: [...state.characters, action.payload],
+        loading: false
       };
     case UPDATE_CHARACTER:
       return {
         ...state,
         characters: state.characters.map(character =>
           character.id === action.payload.id ? action.payload : character
-        )
+        ),
+        loading: false
       };
     case DELETE_CHARACTER:
       return {
         ...state,
         characters: state.characters.filter(
           character => character.id !== action.payload
-        )
+        ),
+        loading: false
+      };
+    case CLEAR_CHARACTERS:
+      return {
+        ...state,
+        characters: null,
+        filtered: null,
+        error: null,
+        current: null
       };
     case SET_CURRENT:
       return {
