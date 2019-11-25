@@ -39,6 +39,23 @@ export default (state, action) => {
         ...state,
         current: null
       };
+    case FILTER_CHARACTERS:
+      return {
+        ...state,
+        filtered: state.characters.filter(character => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return (
+            character.name.match(regex) ||
+            character.race.match(regex) ||
+            character.heroClass.match(regex)
+          );
+        })
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null
+      };
     default:
       return state;
   }

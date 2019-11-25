@@ -45,9 +45,26 @@ const CharacterState = props => {
         charisma: 18,
         hitpoints: 40,
         experience: 13900
+      },
+      {
+        id: 3,
+        name: 'Frog Onleif',
+        race: 'Tabaxi',
+        heroClass: 'Druid',
+        bio: 'A shapeshifting perveyor of ancient artifacts',
+
+        strength: 10,
+        dexterity: 12,
+        constitution: 14,
+        intelligence: 17,
+        wisdom: 16,
+        charisma: 16,
+        hitpoints: 45,
+        experience: 15000
       }
     ],
-    current: null
+    current: null,
+    filtered: null
   };
 
   const [state, dispatch] = useReducer(characterReducer, initialState);
@@ -75,19 +92,27 @@ const CharacterState = props => {
     dispatch({ type: UPDATE_CHARACTER, payload: character });
   };
   // Filter Characters
-
+  const filterCharacters = text => {
+    dispatch({ type: FILTER_CHARACTERS, payload: text });
+  };
   // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     <CharacterContext.Provider
       value={{
         characters: state.characters,
         current: state.current,
+        filtered: state.filtered,
         addCharacter,
         deleteCharacter,
         setCurrent,
         clearCurrent,
-        updateCharacter
+        updateCharacter,
+        filterCharacters,
+        clearFilter
       }}
     >
       {props.children}
