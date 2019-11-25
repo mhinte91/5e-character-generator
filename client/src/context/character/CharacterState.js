@@ -71,7 +71,9 @@ const CharacterState = props => {
     dispatch({ type: CLEAR_CURRENT });
   };
   // Update Character
-
+  const updateCharacter = character => {
+    dispatch({ type: UPDATE_CHARACTER, payload: character });
+  };
   // Filter Characters
 
   // Clear Filter
@@ -84,7 +86,8 @@ const CharacterState = props => {
         addCharacter,
         deleteCharacter,
         setCurrent,
-        clearCurrent
+        clearCurrent,
+        updateCharacter
       }}
     >
       {props.children}

@@ -1,8 +1,37 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import CharacterContext from '../../context/character/characterContext';
 
 const CharacterForm = () => {
   const characterContext = useContext(CharacterContext);
+
+  const {
+    addCharacter,
+    updateCharacter,
+    current,
+    clearCurrent
+  } = characterContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setCharacter(current);
+    } else {
+      setCharacter({
+        name: '',
+        race: '',
+        heroClass: '',
+        bio: '',
+        strength: '',
+        dexterity: '',
+        constitution: '',
+        intelligence: '',
+        wisdom: '',
+        charisma: '',
+        hitpoints: '',
+        experience: ''
+      });
+    }
+  }, [characterContext, current]);
+
   const [character, setCharacter] = useState({
     name: '',
     race: '',
@@ -38,12 +67,6 @@ const CharacterForm = () => {
 
   const onClick = e => {
     e.preventDefault();
-    // let stat =
-    //   Math.floor(Math.random() * 6) +
-    //   1 +
-    //   (Math.floor(Math.random() * 6) + 1) +
-    //   (Math.floor(Math.random() * 6) + 1);
-
     /* Safe Roll */
     let array = [];
     let counter = 0;
@@ -60,26 +83,23 @@ const CharacterForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    characterContext.addCharacter(character);
-    setCharacter({
-      name: '',
-      race: '',
-      heroClass: '',
-      bio: '',
-      strength: '',
-      dexterity: '',
-      constitution: '',
-      intelligence: '',
-      wisdom: '',
-      charisma: '',
-      hitpoints: '',
-      experience: ''
-    });
+    if (current === null) {
+      addCharacter(character);
+    } else {
+      updateCharacter(character);
+    }
+    clearAll();
+  };
+
+  const clearAll = () => {
+    clearCurrent();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>New Character</h2>
+      <h2 className='text-primary'>
+        {current ? 'Edit Character' : 'New Character'}
+      </h2>
       <input
         type='text'
         placeholder='Name'
@@ -242,10 +262,17 @@ const CharacterForm = () => {
       <div>
         <input
           type='submit'
-          value='Create Character'
+          value={current ? 'Update Character' : 'Create Character'}
           className='btn btn-primary btn-block'
         />
       </div>
+      {current && (
+        <div>
+          <button className='btn btn-dark btn-block' onClick={clearAll}>
+            Clear
+          </button>
+        </div>
+      )}
     </form>
   );
 };

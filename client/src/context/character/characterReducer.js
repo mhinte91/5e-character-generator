@@ -15,6 +15,13 @@ export default (state, action) => {
         ...state,
         characters: [...state.characters, action.payload]
       };
+    case UPDATE_CHARACTER:
+      return {
+        ...state,
+        characters: state.characters.map(character =>
+          character.id === action.payload.id ? action.payload : character
+        )
+      };
     case DELETE_CHARACTER:
       return {
         ...state,
