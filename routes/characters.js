@@ -45,7 +45,20 @@ router.post(
     }
 
     // Pull out data from the body
-    const { name, race, heroClass, bio, stats } = req.body;
+    const {
+      name,
+      race,
+      heroClass,
+      bio,
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma,
+      hitpoints,
+      experience
+    } = req.body;
 
     try {
       // Creates a new character model, including the user
@@ -54,7 +67,14 @@ router.post(
         race,
         heroClass,
         bio,
-        stats,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        hitpoints,
+        experience,
         user: req.user.id
       });
 
@@ -75,7 +95,20 @@ router.post(
 // @access      Private
 router.put('/:id', auth, async (req, res) => {
   // Pull out data from the body
-  const { name, race, heroClass, bio, stats } = req.body;
+  const {
+    name,
+    race,
+    heroClass,
+    bio,
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+    hitpoints,
+    experience
+  } = req.body;
 
   // Build character object, if these are included, add
   // to character fields
@@ -84,7 +117,14 @@ router.put('/:id', auth, async (req, res) => {
   if (race) characterFields.race = race;
   if (heroClass) characterFields.heroClass = heroClass;
   if (bio) characterFields.bio = bio;
-  if (stats) characterFields.stats = stats;
+  if (strength) characterFields.strength = strength;
+  if (dexterity) characterFields.dexterity = dexterity;
+  if (constitution) characterFields.constitution = constitution;
+  if (intelligence) characterFields.intelligence = intelligence;
+  if (wisdom) characterFields.wisdom = wisdom;
+  if (charisma) characterFields.charisma = charisma;
+  if (hitpoints) characterFields.hitpoints = hitpoints;
+  if (experience) characterFields.experience = experience;
 
   try {
     // Finds the character by parameter ID

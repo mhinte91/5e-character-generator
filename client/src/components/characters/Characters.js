@@ -15,10 +15,10 @@ const Characters = () => {
     <Fragment>
       {filtered !== null
         ? filtered.map(character => (
-            <CharacterItem key={character.id} character={character} />
+            <CharacterItem key={character._id} character={character} />
           ))
         : characters.map(character => (
-            <CharacterItem key={character.id} character={character} />
+            <CharacterItem key={character._id} character={character} />
           ))}
     </Fragment>
   );
