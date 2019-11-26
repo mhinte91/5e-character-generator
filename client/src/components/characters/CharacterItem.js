@@ -6,10 +6,10 @@ const CharacterItem = ({ character }) => {
   const characterContext = useContext(CharacterContext);
   const { deleteCharacter, setCurrent, clearCurrent } = characterContext;
 
-  const { id, name, race, heroClass, bio } = character;
+  const { _id, name, race, heroClass, bio } = character;
 
   const onDelete = () => {
-    deleteCharacter(id);
+    deleteCharacter(_id);
     clearCurrent();
   };
 

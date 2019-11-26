@@ -54,8 +54,14 @@ const CharacterState = props => {
   };
 
   // Delete Character
-  const deleteCharacter = id => {
-    dispatch({ type: DELETE_CHARACTER, payload: id });
+  const deleteCharacter = async id => {
+    try {
+      await axios.delete(`/api/characters/${id}`);
+
+      dispatch({ type: DELETE_CHARACTER, payload: id });
+    } catch (err) {
+      dispatch({ type: CHARACTER_ERROR, payload: err.response.msg });
+    }
   };
 
   // Clear Characters

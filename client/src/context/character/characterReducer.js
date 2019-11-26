@@ -22,7 +22,7 @@ export default (state, action) => {
     case ADD_CHARACTER:
       return {
         ...state,
-        characters: [...state.characters, action.payload],
+        characters: [action.payload, ...state.characters],
         loading: false
       };
     case UPDATE_CHARACTER:
@@ -37,7 +37,7 @@ export default (state, action) => {
       return {
         ...state,
         characters: state.characters.filter(
-          character => character.id !== action.payload
+          character => character._id !== action.payload
         ),
         loading: false
       };
