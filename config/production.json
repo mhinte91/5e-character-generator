@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://mike123:mike123@dnd-character-creator-v2pen.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
