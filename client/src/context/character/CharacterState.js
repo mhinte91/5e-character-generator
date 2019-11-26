@@ -64,6 +64,27 @@ const CharacterState = props => {
     }
   };
 
+  // Update Character
+  const updateCharacter = async character => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/characters/${character._id}`,
+        character,
+        config
+      );
+
+      dispatch({ type: UPDATE_CHARACTER, payload: res.data });
+    } catch (err) {
+      dispatch({ type: CHARACTER_ERROR, payload: err.response.msg });
+    }
+  };
+
   // Clear Characters
   const clearCharacters = () => {
     dispatch({ type: CLEAR_CHARACTERS });
@@ -76,10 +97,6 @@ const CharacterState = props => {
   // Clear Current Character
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
-  };
-  // Update Character
-  const updateCharacter = character => {
-    dispatch({ type: UPDATE_CHARACTER, payload: character });
   };
   // Filter Characters
   const filterCharacters = text => {

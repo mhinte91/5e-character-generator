@@ -29,7 +29,7 @@ export default (state, action) => {
       return {
         ...state,
         characters: state.characters.map(character =>
-          character.id === action.payload.id ? action.payload : character
+          character._id === action.payload._id ? action.payload : character
         ),
         loading: false
       };
